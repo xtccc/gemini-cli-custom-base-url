@@ -229,6 +229,7 @@ export interface SandboxConfig {
 }
 
 export interface ConfigParameters {
+  modelApiEndpoint?: string;
   sessionId: string;
   embeddingModel?: string;
   sandbox?: SandboxConfig;
@@ -427,6 +428,7 @@ export class Config {
   private readonly codebaseInvestigatorSettings: CodebaseInvestigatorSettings;
   private readonly continueOnFailedApiCall: boolean;
   private readonly retryFetchErrors: boolean;
+  private readonly modelApiEndpoint?: string;
   private readonly enableShellOutputEfficiency: boolean;
   private readonly shellToolInactivityTimeout: number;
   readonly fakeResponses?: string;
@@ -648,6 +650,7 @@ export class Config {
     this.modelConfigService = new ModelConfigService(
       modelConfigServiceConfig ?? DEFAULT_MODEL_CONFIGS,
     );
+    this.modelApiEndpoint = params.modelApiEndpoint;
   }
 
   /**
@@ -821,6 +824,10 @@ export class Config {
 
   getModel(): string {
     return this.model;
+  }
+
+  getModelApiEndpoint(): string | undefined {
+    return this.modelApiEndpoint;
   }
 
   setModel(newModel: string): void {

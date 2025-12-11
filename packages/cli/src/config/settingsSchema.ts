@@ -710,6 +710,15 @@ const SETTINGS_SCHEMA = {
         description: 'Skip the next speaker check.',
         showInDialog: true,
       },
+      apiEndpoint: {
+        type: 'string',
+        label: 'API Endpoint',
+        category: 'Model',
+        requiresRestart: false,
+        default: undefined as string | undefined,
+        description: 'Custom API endpoint for the generative model.',
+        showInDialog: false,
+      },
     },
   },
 

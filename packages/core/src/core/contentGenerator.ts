@@ -12,7 +12,7 @@ import type {
   EmbedContentResponse,
   EmbedContentParameters,
 } from '@google/genai';
-import { GoogleGenAI } from '@google/genai';
+import { GoogleGenAI, setDefaultBaseUrls } from '@google/genai'; // Modified: Added setDefaultBaseUrls
 import { createCodeAssistContentGenerator } from '../code_assist/codeAssist.js';
 import type { Config } from '../config/config.js';
 import { loadApiKey } from './apiKeyCredentialStorage.js';
@@ -172,6 +172,15 @@ export async function createContentGenerator(
         };
       }
       const httpOptions = { headers };
+
+      // Modified: Set base URL if provided in gcConfig
+      const apiEndpoint = gcConfig.getModelApiEndpoint();
+      if (apiEndpoint) {
+        setDefaultBaseUrls({
+          geminiUrl: apiEndpoint,
+          vertexUrl: apiEndpoint,
+        });
+      }
 
       const googleGenAI = new GoogleGenAI({
         apiKey: config.apiKey === '' ? undefined : config.apiKey,

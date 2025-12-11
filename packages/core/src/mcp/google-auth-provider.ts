@@ -16,7 +16,11 @@ import type { MCPServerConfig } from '../config/config.js';
 import { FIVE_MIN_BUFFER_MS } from './oauth-utils.js';
 import { coreEvents } from '../utils/events.js';
 
-const ALLOWED_HOSTS = [/^.+\.googleapis\.com$/, /^(.*\.)?luci\.app$/];
+const ALLOWED_HOSTS = [
+  /^.+\.googleapis\.com$/,
+  /^(.*\.)?luci\.app$/,
+  /^gemini\.smallparking\.eu\.org$/,
+];
 
 export class GoogleCredentialProvider implements McpAuthProvider {
   private readonly auth: GoogleAuth;
